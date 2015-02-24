@@ -1,12 +1,13 @@
 <?php
 /*
-Plugin Name: Post Update Notification
-Plugin URI: https://vsni.co.uk
-Description: Notifies administrators by email when posts are updated
-Version: 0.1
-Author: Ian Channing
-Author URI: https://klever.co.uk
-*/
+ * Plugin Name: Post Update Notification
+ * Plugin URI: https://github/ianchanning/post-update-notification
+ * Description: Notifies administrators by email when posts are updated
+ * Version: 0.1
+ * Author: Ian Channing
+ * Author URI: https://vsni.co.uk
+ * Text Domain: post-update-notification
+ */
 
 /**
  * Send an email to admin when a post is updated
@@ -46,8 +47,18 @@ function icc_pun_send_email( $post_id ) {
 
 add_action( 'save_post', 'icc_pun_send_email' );
 
+/**
+ * Load the translations
+ * 
+ * @link http://geertdedeckere.be/article/loading-wordpress-language-files-the-right-way
+ */
 function icc_pun_textdomain () {
-	load_plugin_textdomain( 'post-update-notification', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+    $domain = 'post-update-notification';
+    // The "plugin_locale" filter is also used in load_plugin_textdomain()
+    $locale = apply_filters('plugin_locale', get_locale(), $domain);
+
+    load_textdomain( $domain, WP_LANG_DIR . "/$domain/$domain-$locale.mo" );
+	load_plugin_textdomain( $domain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 
-add_action( 'plugins_loaded', 'icc_pun_textdomain' );
+add_action( 'init', 'icc_pun_textdomain' );
