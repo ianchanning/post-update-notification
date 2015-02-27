@@ -3,7 +3,7 @@
  * Plugin Name: Post Update Notification
  * Plugin URI: https://github/ianchanning/post-update-notification
  * Description: Notifies administrators by email when posts are updated
- * Version: 0.1
+ * Version: 0.2.0
  * Author: Ian Channing
  * Author URI: https://vsni.co.uk
  * Text Domain: post-update-notification
